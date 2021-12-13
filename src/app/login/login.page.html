@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-row class="ion-justify-content-center">
+    <ion-row>
+      <ion-col>
+        <ion-item lines=none>
+          <ion-label>Email</ion-label>
+          <ion-input type="email" [(ngModel)]="email"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="formSubmitted && (!email || email.length === 0)">
+      <span class="errorMessage">
+        Email is required.
+      </span>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item lines=none>
+          <ion-label>Password</ion-label>
+          <ion-input type="password" [(ngModel)]="password"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="formSubmitted && (!password || password.length === 0)">
+      <span class="errorMessage">
+        Password is required.
+      </span>
+    </ion-row>
+
+    <ion-row class="buttons">
+      <ion-button (click)="login()">Login</ion-button>
+      <ion-button (click)="registerAccount()">Register</ion-button>
+    </ion-row>
+  </ion-row>
+</ion-content>

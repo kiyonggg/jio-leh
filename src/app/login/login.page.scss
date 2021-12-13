@@ -1,0 +1,10 @@
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.errorMessage {
+  color: #ee4444;
+  padding-left: 1rem;
+}

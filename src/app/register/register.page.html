@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <form [formGroup]="userForm" (ngSubmit)="createUser()">
+        <ion-row>
+          <ion-col>
+            <ion-item lines=none>
+              <ion-label>First Name</ion-label>
+              <ion-input type="text" formControlName="firstName" (ngModelChange)="checkFormValid()"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="errorControl.firstName.errors?.required && (firstName.dirty || firstName.touched)">
+          <span class="errorMessage">First Name is required.</span>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item lines=none>
+              <ion-label>Last Name</ion-label>
+              <ion-input type="text" formControlName="lastName" (ngModelChange)="checkFormValid()"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="errorControl.lastName.errors?.required && (lastName.dirty || lastName.touched)">
+          <span class="errorMessage">Last Name is required.</span>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item lines=none>
+              <ion-label>Email</ion-label>
+              <ion-input type="email" formControlName="email" (ngModelChange)="checkFormValid()"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="errorControl.email.errors?.required && (email.dirty || email.touched)">
+          <span class="errorMessage">Email is required.</span>
+        </ion-row>
+        <ion-row *ngIf="errorControl.email.errors?.email && (email.dirty || email.touched)">
+          <span class="errorMessage">Please input an appropriate email.</span>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item lines=none>
+              <ion-label>Password</ion-label>
+              <ion-input type="password" formControlName="password" (ngModelChange)="checkFormValid()"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="errorControl.password.errors?.required && (password.dirty || password.touched)">
+          <span class="errorMessage">Password is required.</span>
+        </ion-row>
+        <ion-row *ngIf="userForm.get('password').hasError('minlength') && (password.dirty || password.touched)">
+          <span class="errorMessage">Password needs to be more than 8 chars.</span>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-item lines=none>
+              <ion-label>Confirm password</ion-label>
+              <ion-input type="password" formControlName="cfmPassword" (ngModelChange)="checkFormValid()"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="errorControl.cfmPassword.errors?.required && (cfmPassword.dirty || cfmPassword.touched)">
+          <span class="errorMessage">Confirm password is required.</span>
+        </ion-row>
+        <ion-row *ngIf="cfmPasswordOnChange()" (ionChange)="cfmPasswordOnChange()">
+          <span class="errorMessage">Passwords are not the same!</span>
+        </ion-row>
+
+        <ion-row class="ion-align-items-center ion-justify-content-center">
+          <ion-button
+            (click)="createUser()"
+            [class.button-disabled]="!formValid"
+            >Create Account
+            <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+          </ion-button>
+        </ion-row>
+      </form>
+    </ion-row>
+  </ion-grid>
+</ion-content>
