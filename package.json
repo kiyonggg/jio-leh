@@ -13,7 +13,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/cli": "^13.1.1",
+    "@angular/cli": "^12.2.13",
     "@angular/common": "~12.1.1",
     "@angular/core": "~12.1.1",
     "@angular/fire": "^7.2.0",

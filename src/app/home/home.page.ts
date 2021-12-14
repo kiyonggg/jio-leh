@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { CreateRequestModalComponent } from './create-request-modal/create-request-modal.component';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,9 @@ export class HomePage implements OnInit {
   }
 
   addRequest() {
+    this.modalController.create({
+      component: CreateRequestModalComponent,
+    }).then(x => x.present());
   }
 
 }
