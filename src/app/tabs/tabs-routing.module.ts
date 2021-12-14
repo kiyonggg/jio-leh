@@ -18,6 +18,10 @@ const routes: Routes = [
         loadChildren: () => import('../schedule/schedule.module').then(m => m.SchedulePageModule)
       },
       {
+        path: 'account',
+        loadChildren: () => import('../account/account.module').then(m => m.AccountPageModule)
+      },
+      {
         path: '',
         redirectTo: '/home',
         pathMatch: 'full'

@@ -3,8 +3,8 @@ import { User } from "./user";
 
 export class ItemRequest {
   id: string | undefined;
-  userRequested: User | undefined;
-  userAccepted: User | undefined;
+  userRequested: string | undefined;
+  userAccepted: string | undefined;
   itemName: string | undefined;
   quantity: number | undefined;
   deliveryFee: number | undefined;
@@ -15,8 +15,8 @@ export class ItemRequest {
 
   constructor(
     id?: string,
-    userReqeusted?: User,
-    userAccepted?: User,
+    userReqeusted?: string,
+    userAccepted?: string,
     itemName?: string,
     quantity?: number,
     deliveryFee?: number,

@@ -8,6 +8,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
 import { CreateRequestModalComponent } from './create-request-modal/create-request-modal.component';
+import { RequestCardComponent } from './request-card/request-card.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { CreateRequestModalComponent } from './create-request-modal/create-reque
     ReactiveFormsModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage, CreateRequestModalComponent]
+  declarations: [HomePage, CreateRequestModalComponent, RequestCardComponent]
 })
 export class HomePageModule {}

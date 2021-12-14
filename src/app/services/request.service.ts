@@ -35,7 +35,12 @@ export class RequestService {
                 request.userRequested = userId;
                 request.status = ItemRequestStatusEnum.PENDING;
                 this.afs.collection("requests").add(request).then(res => {
-                  resolve(true);
+                  this.afs.doc("requests/" + res.id).update({
+                    id: res.id
+                  }).then(result => {
+                    resolve(true);
+                  })
+                  // resolve(true);
                 }, error => {
                   reject(error);
                 })
@@ -45,6 +50,37 @@ export class RequestService {
         )
         .subscribe(res => {
         });
+    })
+  }
+
+  getAllPendingRequests() {
+    return new Promise((resolve, reject) => {
+      this.afs.collection('requests', ref => ref.where('status', '==', 'PENDING')).valueChanges().subscribe(requests => {
+        resolve(requests);
+      })
+    })
+  }
+
+  acceptRequest(requestId: string) {
+    return new Promise((resolve, reject) => {
+      this.afs.doc("requests/" + requestId).set({
+        status: ItemRequestStatusEnum.ACCEPTED,
+        userAccepted: JSON.parse(sessionStorage.currentUser).uid,
+      }).then(res => {
+        resolve(res);
+      })
+    })
+  }
+
+  getUserByUserId(userId: string) {
+    return new Promise((resolve, reject) => {
+      this.afs.collection("users").doc(userId).get().subscribe(user => {
+        if (user) {
+          resolve(user.data());
+        } else {
+          reject(false);
+        }
+      })
     })
   }
 }

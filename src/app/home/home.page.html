@@ -16,6 +16,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <app-request-card *ngFor="let request of requests" [request]="request"></app-request-card>
   
   <!-- <ion-header collapse="condense">
     <ion-toolbar>

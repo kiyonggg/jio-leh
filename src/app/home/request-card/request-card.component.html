@@ -1,0 +1,55 @@
+<!-- <ion-accordion-group>
+  <ion-accordion> -->
+    <ion-card *ngIf="detailsLoaded | async">
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="2">
+            <ion-img [src]="request.image" class="image"></ion-img>
+          </ion-col>
+          <ion-col size="7">
+            <ion-row>
+              <ion-label class="ion-padding"><span class="itemName">{{ request.quantity }}x {{ request.itemName
+                  }}</span>
+              </ion-label>
+            </ion-row>
+
+            <ion-row>
+              <ion-label class="ion-padding-start ion-align-items-center">
+                <ion-icon name="cash-outline"></ion-icon>
+                <span class="details">{{ request.deliveryFee | currency: 'USD' }}</span>
+              </ion-label>
+            </ion-row>
+
+            <ion-row>
+              <ion-label class="ion-padding-start ion-align-items-center">
+                <ion-icon name="location-outline"></ion-icon>
+                <span class="details">{{ request.location }}</span>
+              </ion-label>
+            </ion-row>
+
+            <ion-row>
+              <ion-label class="ion-padding-start ion-align-items-center">
+                <ion-icon name="reader-outline"></ion-icon>
+                <span class="details">{{ request.description }}</span>
+              </ion-label>
+            </ion-row>
+
+            <ion-row>
+              <ion-label class="ion-padding-start ion-align-items-center">
+                <ion-icon name="person-outline"></ion-icon>
+                <span class="details">{{ userRequested?.firstName + ' ' + userRequested?.lastName }}</span>
+              </ion-label>
+            </ion-row>
+          </ion-col>
+          <ion-col size="3">
+            <ion-row>
+              <ion-button size="small" class="accept-button" (click)="acceptConfirmation()">
+                Accept
+              </ion-button>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  <!-- </ion-accordion>
+</ion-accordion-group> -->

@@ -56,4 +56,9 @@ export class AuthService {
       });
     })
   }
+
+  signOut() {
+    sessionStorage.currentUser = undefined;
+    sessionStorage.isLogin = false;
+  }
 }
