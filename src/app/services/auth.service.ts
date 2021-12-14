@@ -24,11 +24,9 @@ export class AuthService {
     return this.afAuth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.setUserDataForSignUp(result.user, firstName, lastName).then(res => {
-          // this.router.navigate(['login']);
           return res;
         });
       }).catch((error) => {
-        // window.alert(error.message);
         return error;
       });
   }
