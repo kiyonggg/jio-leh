@@ -2,9 +2,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 10px;
 }
 
 .errorMessage {
   color: #ee4444;
   padding-left: 1rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

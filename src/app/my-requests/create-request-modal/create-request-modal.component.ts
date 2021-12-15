@@ -101,8 +101,11 @@ export class CreateRequestModalComponent implements OnInit {
         this.presentToast('Your request has been created!');
         this.closeModal();
       }, error => {
+        this.loading = false;
         this.presentAlert('There is an error, try again later.' + error);
       })
+    } else {
+      this.loading = false;
     }
   }
 
@@ -123,7 +126,14 @@ export class CreateRequestModalComponent implements OnInit {
     }).then(x => x.present());
   }
 
+  clearForm() {
+    this.requestForm.reset();
+    this.loading = false;
+    this.formSubmitted = false;
+  }
+
   closeModal() {
+    this.clearForm();
     this.modalController.dismiss();
   }
 

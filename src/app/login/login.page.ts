@@ -28,10 +28,14 @@ export class LoginPage implements OnInit {
     if (this.validateCredentials()) {
       this.authService.signIn(this.email, this.password).then(user => {
         this.loading = false;
+        this.clearForm();
         this.router.navigate(['/home']);
       }, error => {
+        this.loading = false;
         this.loginError = true;
       })
+    } else {
+      this.loading = false;
     }
   }
 
@@ -45,6 +49,13 @@ export class LoginPage implements OnInit {
     } else {
       return true;
     }
+  }
+
+  clearForm() {
+    this.email = undefined;
+    this.password = undefined;
+    this.formSubmitted = false;
+    this.loginError = false;
   }
 
   registerAccount() {

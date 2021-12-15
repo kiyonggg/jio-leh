@@ -1,18 +1,10 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content fullscreen>
-  <ion-row class="ion-justify-content-center">
+  <ion-row class="ion-justify-content-center form">
     <ion-row>
-      <ion-col>
-        <ion-item lines=none>
-          <ion-label>Email</ion-label>
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
           <ion-input type="email" [(ngModel)]="email"></ion-input>
         </ion-item>
-      </ion-col>
     </ion-row>
     <ion-row *ngIf="formSubmitted && (!email || email.length === 0)">
       <span class="errorMessage">
@@ -21,12 +13,10 @@
     </ion-row>
 
     <ion-row>
-      <ion-col>
-        <ion-item lines=none>
-          <ion-label>Password</ion-label>
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
           <ion-input type="password" [(ngModel)]="password"></ion-input>
         </ion-item>
-      </ion-col>
     </ion-row>
     <ion-row *ngIf="formSubmitted && (!password || password.length === 0)">
       <span class="errorMessage">
@@ -34,9 +24,20 @@
       </span>
     </ion-row>
 
+    <ion-row *ngIf="loginError">
+      <span class="errorMessage">
+        Wrong email and/or password entered.
+      </span>
+    </ion-row>
+
     <ion-row class="buttons">
-      <ion-button (click)="login()">Login</ion-button>
-      <ion-button (click)="registerAccount()">Register</ion-button>
+      <ion-button (click)="login()" [class.button-disabled]="loading">Login
+        <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+      </ion-button>
+    </ion-row>
+  
+    <ion-row>
+      <span>Don't have an account? Click <a (click)="registerAccount()">here</a> to sign up!</span>
     </ion-row>
   </ion-row>
 </ion-content>

@@ -16,8 +16,8 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-item>
-            <ion-label>Item Name</ion-label>
+          <ion-item class="ion-no-padding">
+            <ion-label position="floating">Item Name</ion-label>
             <ion-input type="text" formControlName="itemName" (ngModelChange)="checkFormValid()"></ion-input>
           </ion-item>
         </ion-col>
@@ -28,8 +28,8 @@
 
       <ion-row>
         <ion-col>
-          <ion-item>
-            <ion-label>Quantity</ion-label>
+          <ion-item class="ion-no-padding">
+            <ion-label position="floating">Quantity (min. 1)</ion-label>
             <ion-input type="number" formControlName="quantity" (ngModelChange)="checkFormValid()"></ion-input>
           </ion-item>
         </ion-col>
@@ -40,8 +40,8 @@
 
       <ion-row>
         <ion-col>
-          <ion-item>
-            <ion-label>Delivery Fee</ion-label>
+          <ion-item class="ion-no-padding">
+            <ion-label position="floating">Delivery Fee (min $0.20)</ion-label>
             <ion-input type="number" formControlName="deliveryFee" (ngModelChange)="checkFormValid()"></ion-input>
           </ion-item>
         </ion-col>
@@ -52,7 +52,7 @@
 
       <ion-row>
         <ion-col>
-          <ion-item>
+          <ion-item class="ion-no-padding">
             <ion-label>Upload an image</ion-label>
             <ion-button style="color: white; padding-left: 5px" (click)="file.click()">Upload</ion-button>
           </ion-item>
@@ -73,8 +73,8 @@
 
       <ion-row>
         <ion-col>
-          <ion-item>
-            <ion-label>Location</ion-label>
+          <ion-item class="ion-no-padding">
+            <ion-label position="floating">Purchase Location</ion-label>
             <ion-input type="text" formControlName="location" (ngModelChange)="checkFormValid()"></ion-input>
           </ion-item>
         </ion-col>
@@ -85,8 +85,8 @@
 
       <ion-row>
         <ion-col>
-          <ion-item>
-            <ion-label>Description</ion-label>
+          <ion-item class="ion-no-padding">
+            <ion-label position="floating">Description</ion-label>
             <ion-textarea rows="5" placeholder="Enter additional details here, such as delivery/meetup location"
             formControlName="description" (ngModelChange)="checkFormValid()">
             </ion-textarea>
@@ -96,10 +96,14 @@
       <ion-row *ngIf="errorControl.description.errors?.required && (description.dirty || description.touched || formSubmitted)">
         <span>Description is required.</span>
       </ion-row>
-
-      <ion-row>
-        <ion-button type="submit">Submit</ion-button>
-      </ion-row>
     </ion-grid>
   </form>
 </ion-content>
+
+<ion-footer>
+  <ion-row class="ion-justify-content-center">
+    <ion-button (click)="createRequest()" [class.button-disabled]="loading">Submit
+      <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+    </ion-button>
+  </ion-row>
+</ion-footer>
