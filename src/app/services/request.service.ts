@@ -7,10 +7,19 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { finalize } from 'rxjs/operators';
 import { ItemRequestStatusEnum } from '../models/enums/ItemRequestStatusEnum';
 
+import firebase from 'firebase/compat/app';
+
 @Injectable({
   providedIn: 'root'
 })
 export class RequestService {
+
+  allIncompleteRequests: ItemRequest[];
+  allOngoingAcceptedRequests: ItemRequest[];
+  allCompletedAcceptedRequests: ItemRequest[];
+
+  allCurrentUserCurrentRequests: ItemRequest[];
+  allCurrentUserCompletedRequests: ItemRequest[];
 
   constructor(
     private storage: AngularFireStorage,
@@ -53,9 +62,30 @@ export class RequestService {
     })
   }
 
-  getAllPendingRequests() {
+  getAllRequests() {
     return new Promise((resolve, reject) => {
-      this.afs.collection('requests', ref => ref.where('status', '==', 'PENDING')).valueChanges().subscribe(requests => {
+      this.afs.collection('requests').valueChanges().subscribe(requests => {
+        const itemRequests = <ItemRequest[]>requests;
+        this.allIncompleteRequests = itemRequests.filter(request => {
+          return request.status === ItemRequestStatusEnum.PENDING
+        });
+        this.allOngoingAcceptedRequests = itemRequests.filter(request => {
+          return request.status === ItemRequestStatusEnum.ACCEPTED && 
+            request.userAccepted === JSON.parse(sessionStorage.currentUser).uid
+        });
+        this.allCompletedAcceptedRequests = itemRequests.filter(request => {
+          return request.status === ItemRequestStatusEnum.DELIVERED &&
+            request.userAccepted === JSON.parse(sessionStorage.currentUser).uid
+        })
+        this.allCurrentUserCurrentRequests = itemRequests.filter(request => {
+          return (request.status === ItemRequestStatusEnum.PENDING ||
+            request.status === ItemRequestStatusEnum.ACCEPTED) &&
+            request.userRequested === JSON.parse(sessionStorage.currentUser).uid
+        });
+        this.allCurrentUserCompletedRequests = itemRequests.filter(request => {
+          return request.status === ItemRequestStatusEnum.DELIVERED &&
+            request.userRequested === JSON.parse(sessionStorage.currentUser).uid
+        });;
         resolve(requests);
       })
     })
@@ -63,11 +93,40 @@ export class RequestService {
 
   acceptRequest(requestId: string) {
     return new Promise((resolve, reject) => {
-      this.afs.doc("requests/" + requestId).set({
+      this.afs.doc("requests/" + requestId).update({
         status: ItemRequestStatusEnum.ACCEPTED,
         userAccepted: JSON.parse(sessionStorage.currentUser).uid,
       }).then(res => {
-        resolve(res);
+        resolve(true);
+      })
+    })
+  }
+
+  cancelRequest(requestId: string) {
+    return new Promise((resolve, reject) => {
+      this.afs.doc("requests/" + requestId).update({
+        status: ItemRequestStatusEnum.PENDING,
+        userAccepted: firebase.firestore.FieldValue.delete(),
+      }).then(res => {
+        resolve(true);
+      })
+    })
+  }
+
+  deleteRequest(requestId) {
+    return new Promise((resolve, reject) => {
+      this.afs.doc("requests/" + requestId).delete().then(res => {
+        resolve(true);
+      })
+    });
+  }
+
+  markRequestAsDelivered(requestId) {
+    return new Promise((resolve, reject) => {
+      this.afs.doc("requests/" + requestId).update({
+        status: ItemRequestStatusEnum.DELIVERED,
+      }).then(res => {
+        resolve(true);
       })
     })
   }

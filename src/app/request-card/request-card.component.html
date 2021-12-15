@@ -1,0 +1,81 @@
+<ion-card *ngIf="detailsLoaded | async">
+  <ion-card-header (click)="toggleAccordion()">
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="3">
+          <ion-img [src]="request.image" class="image"></ion-img>
+        </ion-col>
+        <ion-col size="9">
+          <ion-row>
+            <ion-label class="ion-padding"><span class="itemName">{{ request.quantity }}x {{ request.itemName
+                }}</span>
+            </ion-label>
+          </ion-row>
+
+          <ion-row *ngIf="isCurrentUserPending()" class="ion-padding-start">
+            <div *ngIf="request.status === 'PENDING'">
+              <ion-badge color="warning">Pending</ion-badge>
+            </div>
+            <div *ngIf="request.status === 'ACCEPTED'">
+              <ion-badge color="success">Accepted</ion-badge>
+            </div>
+          </ion-row>
+
+          <ion-row>
+            <ion-label class="ion-padding-start ion-align-items-center">
+              <ion-icon name="cash-outline"></ion-icon>
+              <span class="details">{{ request.deliveryFee | currency: 'USD' }}</span>
+            </ion-label>
+          </ion-row>
+
+          <ion-row>
+            <ion-label class="ion-padding-start ion-align-items-center">
+              <ion-icon name="location-outline"></ion-icon>
+              <span class="details">{{ request.location }}</span>
+            </ion-label>
+          </ion-row>
+
+          <ion-row>
+            <ion-label class="ion-padding-start ion-align-items-center">
+              <ion-icon name="reader-outline"></ion-icon>
+              <span class="details">{{ request.description }}</span>
+            </ion-label>
+          </ion-row>
+
+          <ion-row>
+            <ion-label class="ion-padding-start ion-align-items-center">
+              <ion-icon name="person-outline"></ion-icon>
+              <span class="details">{{ userRequested?.firstName + ' ' + userRequested?.lastName }}</span>
+            </ion-label>
+          </ion-row>
+
+          <ion-row *ngIf="userAccepted !== undefined">
+            <ion-label class="ion-padding-start ion-align-items-center">
+              <ion-icon name="car-outline"></ion-icon>
+              <span class="details">{{ userAccepted?.firstName + ' ' + userAccepted?.lastName }}</span>
+            </ion-label>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-header>
+  <ion-card-content #details>
+    <ion-row class="ion-justify-content-center">
+      <ion-button size="small" (click)="viewImage()">
+        View Image
+      </ion-button>
+      <ion-button *ngIf="canAccept()" size="small" class="accept-button" (click)="acceptConfirmation()">
+        Accept
+      </ion-button>
+      <ion-button *ngIf="canMarkAsDelivered()" size="small" class="accept-button" (click)="deliveredConfirmation()">
+        Delivered
+      </ion-button>
+      <ion-button *ngIf="canCancel()" size="small" class="cancel-button" (click)="cancelConfirmation()">
+        Cancel
+      </ion-button>
+      <ion-button *ngIf="canModify()" size="small" class="cancel-button" (click)="deleteConfirmation()">
+        Delete
+      </ion-button>
+    </ion-row>
+  </ion-card-content>
+</ion-card>

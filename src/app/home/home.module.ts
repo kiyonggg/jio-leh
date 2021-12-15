@@ -7,8 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
-import { CreateRequestModalComponent } from './create-request-modal/create-request-modal.component';
-import { RequestCardComponent } from './request-card/request-card.component';
+import { RequestCardComponent } from '../request-card/request-card.component';
 
 @NgModule({
   imports: [
@@ -18,6 +17,6 @@ import { RequestCardComponent } from './request-card/request-card.component';
     ReactiveFormsModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage, CreateRequestModalComponent, RequestCardComponent]
+  declarations: [HomePage, RequestCardComponent]
 })
 export class HomePageModule {}

@@ -1,0 +1,22 @@
+ion-grid {
+  position: relative;
+}
+
+.image-container {
+  height: 100vh;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.image {
+  width: auto;
+  height: auto;
+}
+
+.close-button {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

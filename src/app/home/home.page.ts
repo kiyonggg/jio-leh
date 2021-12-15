@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { resolve } from 'dns';
 import { ItemRequest } from '../models/itemRequest';
 import { RequestService } from '../services/request.service';
-import { CreateRequestModalComponent } from './create-request-modal/create-request-modal.component';
+import { CreateRequestModalComponent } from '../my-requests/create-request-modal/create-request-modal.component';
 
 @Component({
   selector: 'app-home',
@@ -11,24 +12,19 @@ import { CreateRequestModalComponent } from './create-request-modal/create-reque
 })
 export class HomePage implements OnInit {
 
-  requests: ItemRequest[];
+  segmentValue: string;
+  requestsLoaded: Promise<boolean>;
 
   constructor(
-    private modalController: ModalController,
     private requestService: RequestService,
   ) { }
 
   ngOnInit() {
-    this.requestService.getAllPendingRequests().then(requests => {
-      console.log(requests)
-      this.requests = <ItemRequest[]>requests;
+    this.segmentValue = 'all';
+    this.requestService.getAllRequests().then(requests => {
+      // this.requests = <ItemRequest[]>requests;
+      this.requestsLoaded = Promise.resolve(true);
     });
-  }
-
-  addRequest() {
-    this.modalController.create({
-      component: CreateRequestModalComponent,
-    }).then(x => x.present());
   }
 
 }

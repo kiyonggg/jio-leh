@@ -1,16 +1,18 @@
 <ion-header [translucent]="true">
   <ion-toolbar class="header">
     <ion-title>
-      <ion-row class="ion-justify-content-center ion-align-items-end" style="color: white;">All Requests</ion-row>
+      <ion-row class="ion-justify-content-center ion-align-items-end" style="color: white;">My Requests</ion-row>
     </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="addRequest()">
+        <ion-icon slot="icon-only" name="add" style="color: white"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-segment [(ngModel)]="segmentValue">
-    <ion-segment-button value="all">
-      <ion-label>All</ion-label>
-    </ion-segment-button>
     <ion-segment-button value="ongoing">
       <ion-label>Ongoing</ion-label>
     </ion-segment-button>
@@ -24,26 +26,10 @@
       <ion-spinner name="crescent"></ion-spinner>
     </ion-row>
   </div>
+  
   <div *ngIf="requestsLoaded | async">
-    <ion-grid *ngIf="segmentValue === 'all'">
-      <div *ngIf="requestService.allIncompleteRequests.length === 0">
-        <ion-row class="ion-justify-content-center">
-          <ion-text>
-            <ion-icon name="sad-outline" style="font-size: 100px; color: gray"></ion-icon>
-          </ion-text>
-        </ion-row>
-        <ion-row class="ion-justify-content-center">
-          <ion-text style="color: gray">
-            There are no requests from other users currently.
-          </ion-text>
-        </ion-row>
-      </div>
-      <app-request-card *ngFor="let request of requestService.allIncompleteRequests" [request]="request">
-      </app-request-card>
-    </ion-grid>
-
     <ion-grid *ngIf="segmentValue === 'ongoing'">
-      <div *ngIf="requestService.allOngoingAcceptedRequests.length === 0">
+      <div *ngIf="requestService.allCurrentUserCurrentRequests.length === 0">
         <ion-row class="ion-justify-content-center">
           <ion-text>
             <ion-icon name="sad-outline" style="font-size: 100px; color: gray"></ion-icon>
@@ -51,16 +37,16 @@
         </ion-row>
         <ion-row class="ion-justify-content-center">
           <ion-text style="color: gray">
-            You are currently not fulfilling any requests.
+            You have no ongoing requests.
           </ion-text>
         </ion-row>
       </div>
-      <app-request-card *ngFor="let request of requestService.allOngoingAcceptedRequests" [request]="request">
+      <app-request-card *ngFor="let request of requestService.allCurrentUserCurrentRequests" [request]="request">
       </app-request-card>
     </ion-grid>
 
     <ion-grid *ngIf="segmentValue === 'completed'">
-      <div *ngIf="requestService.allCompletedAcceptedRequests.length === 0">
+      <div *ngIf="requestService.allCurrentUserCompletedRequests.length === 0">
         <ion-row class="ion-justify-content-center">
           <ion-text>
             <ion-icon name="sad-outline" style="font-size: 100px; color: gray"></ion-icon>
@@ -68,11 +54,11 @@
         </ion-row>
         <ion-row class="ion-justify-content-center">
           <ion-text style="color: gray">
-            You have not completed any requests.
+            You have no completed requests.
           </ion-text>
         </ion-row>
       </div>
-      <app-request-card *ngFor="let request of requestService.allCompletedAcceptedRequests" [request]="request">
+      <app-request-card *ngFor="let request of requestService.allCurrentUserCompletedRequests" [request]="request">
       </app-request-card>
     </ion-grid>
   </div>
