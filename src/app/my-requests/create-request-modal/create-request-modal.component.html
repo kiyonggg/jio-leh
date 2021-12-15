@@ -54,7 +54,7 @@
         <ion-col>
           <ion-item class="ion-no-padding">
             <ion-label>Upload an image</ion-label>
-            <ion-button style="color: white; padding-left: 5px" (click)="addPhotoToGallery()">Take Photo</ion-button>
+            <!-- <ion-button style="color: white; padding-left: 5px" (click)="addPhotoToGallery()">Take Photo</ion-button> -->
             <ion-button style="color: white; padding-left: 5px" (click)="file.click()">Upload</ion-button>
           </ion-item>
         </ion-col>
@@ -70,7 +70,7 @@
           *ngIf="previewPic && imgURL"
           [src]="imgURL"
         ></ion-img>
-        <ion-img *ngIf="photoService.photos" [src]="photoService.photos.webviewPath"></ion-img>
+        <!-- <ion-img *ngIf="photoService.photos" [src]="photoService.photos.webviewPath"></ion-img> -->
       </ion-row>
 
       <ion-row>

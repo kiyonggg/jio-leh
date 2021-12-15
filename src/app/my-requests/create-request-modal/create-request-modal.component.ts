@@ -92,7 +92,7 @@ export class CreateRequestModalComponent implements OnInit {
   createRequest() {
     this.formSubmitted = true;
     this.loading = true;
-    if (this.formValid && this.imgURL) {
+    if (this.formValid && (this.imgURL || this.photoService.photos)) {
       let newItemRequest = {
         itemName: this.itemName.value,
         quantity: this.quantity.value,
