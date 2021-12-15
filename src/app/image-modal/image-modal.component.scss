@@ -1,22 +1,25 @@
 ion-grid {
   position: relative;
+  padding: 0;
 }
 
 .image-container {
   height: 100vh;
-  text-align: center;
-  vertical-align: middle;
+  width: 100vw;
+  position: relative;
 }
 
-.image {
-  width: auto;
-  height: auto;
+ion-img {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translate(0, -50%);
 }
 
 .close-button {
   position: absolute;
-  bottom: 20px;
+  top: 20px;
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
 }
