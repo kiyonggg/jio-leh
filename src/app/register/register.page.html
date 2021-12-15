@@ -7,7 +7,10 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-img src="../../assets/JioLeh.png"></ion-img>
+    </ion-row>
     <ion-row class="ion-justify-content-center form">
       <form [formGroup]="userForm" (ngSubmit)="createUser()">
         <ion-row>

@@ -5,13 +5,12 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyBfpjHT3uvDLWx28OMEvv-nK_2-zE8wjj4",
-    authDomain: "rh-cca-time-planner.firebaseapp.com",
-    projectId: "rh-cca-time-planner",
-    storageBucket: "rh-cca-time-planner.appspot.com",
-    messagingSenderId: "632040224127",
-    appId: "1:632040224127:web:4b0a95183aaeb904d1964a",
-    measurementId: "G-6V74Q4RCBV"
+    apiKey: "AIzaSyCPYpVBwVUyA6dfCdSL1lgRNzaeiCsPr8Q",
+    authDomain: "jio-leh-c2457.firebaseapp.com",
+    projectId: "jio-leh-c2457",
+    storageBucket: "jio-leh-c2457.appspot.com",
+    messagingSenderId: "534275732022",
+    appId: "1:534275732022:web:4570a2a3f26b39aacf5e97"
   }
 };
 

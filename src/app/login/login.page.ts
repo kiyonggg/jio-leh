@@ -59,6 +59,7 @@ export class LoginPage implements OnInit {
   }
 
   registerAccount() {
+    this.clearForm();
     this.router.navigate(['/register']);
   }
 
