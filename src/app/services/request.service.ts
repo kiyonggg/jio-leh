@@ -38,7 +38,6 @@ export class RequestService {
         .pipe(
           finalize(() => {
             fileRef.getDownloadURL().subscribe(url => {
-              console.log('url', url)
               if (url) {
                 request.image = url;
                 request.userRequested = userId;

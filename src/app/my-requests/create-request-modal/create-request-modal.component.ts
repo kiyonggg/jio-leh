@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ItemRequest } from 'src/app/models/itemRequest';
 import { RequestService } from 'src/app/services/request.service';
 
 @Component({
@@ -36,7 +35,6 @@ export class CreateRequestModalComponent implements OnInit {
       location: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
     });
-    //rmb to add the status
   }
 
   checkFormValid() {
