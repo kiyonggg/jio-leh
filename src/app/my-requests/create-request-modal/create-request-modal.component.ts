@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RequestService } from 'src/app/services/request.service';
+import { PhotoService } from 'src/app/services/photo.service';
 
 @Component({
   selector: 'app-create-request-modal',
@@ -25,6 +26,7 @@ export class CreateRequestModalComponent implements OnInit {
     private alertController: AlertController,
     private toastController: ToastController,
     private requestService: RequestService,
+    private photoService: PhotoService,
   ) { }
 
   ngOnInit() {
@@ -75,6 +77,10 @@ export class CreateRequestModalComponent implements OnInit {
       this.imgURL = reader.result;
     };
     this.previewPic = true;
+  }
+
+  addPhotoToGallery() {
+    this.photoService.addNewToGallery();
   }
 
   removeImage() {
